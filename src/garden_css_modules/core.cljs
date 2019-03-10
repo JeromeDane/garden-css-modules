@@ -1,13 +1,21 @@
 (ns garden-css-modules.core
-    (:require))
+    (:require [garden-css-modules.macro :refer-macros [defstyle]]))
+              ; [garden-css-modules.runtime :refer [modularize]]))
 
-(enable-console-print!)
+(defn p [a]
+  (js/console.log (js/JSON.stringify (clj->js a) nil 2)))
 
-(println "This text is printed from src/garden-css-modules/core.cljs. Go ahead and edit it and see reloading in action.")
+(defstyle style
+  [:div.foo.bar {:color "red"}
+   [:a {}
+     [:.link.yellow {:color "yellow"}]
+     [:.link.blue {:color "blue"}]]]
+  [:.container {:color "blue"}])
 
-;; define your app data so that it doesn't get over-written on reload
+(p style)
+; (p style-module)
 
-(defonce app-state (atom {:text "Hello world!"}))
+
 
 
 (defn on-js-reload [])

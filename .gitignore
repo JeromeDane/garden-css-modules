@@ -1,3 +1,4 @@
 *.log
 resources/public/js/compiled/
 .*
+target/
