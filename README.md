@@ -31,9 +31,9 @@ For now, start a repl with `lein repl` and connect using an nrepl client. Evalua
   [".brother + .sister" {:color "orange"}])
 ```
 
-Which returns a map with the `:styles` key having the value of new garden data with all class names hashed and a `:names` map that allows you to look up the hashed name of and class name.
+This returns a map with the `:styles` key having the value of new garden data with all class names hashed and a `:names` map that allows you to look up the hashed name of any class name.
 
-Note that the `garden-css-modules.defstyle` macro does not yet inject styles into the `head` tag in `cljs` mode as intendtended.
+Note that the `garden-css-modules/defstyle` macro does not yet inject styles into the `head` tag in `cljs` mode as intendtended.
 
 ## Deprecated (TODO: restore Figwheel)
 
