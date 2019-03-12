@@ -3,7 +3,38 @@ Apply CSS module style class name hashing to garden data. Learn more about the p
 
 WORK IN PROGRESS. NO GUARANTEES AT THIS POINT.
 
+## To Do
+
+* Inject styles into `head` tag when calling `defstyle` macro
+* Allow concatination of keys like `:class (my-style :foo :bar :baz)`
+* Ensure proper detection of namespace
+* Implement production mode to short hash class + namespace
+* In dev mode, append class + namespace with short hash
+* Re-implement figwheel in `projct.clj` and create easy-to use example
+* Add documentation and examples to this readme
+* Get feedback from colleagues and iterate
+* Publish to clojars
+
 ## Development
+
+For now, start a repl with `lein repl` and connect using an nrepl client. Evaluate the `garden-css-modules` namespace, then call modularize. E.G:
+
+```
+(modularize
+  [:div.foo.bar {:color "red"}
+   [:a {}
+     [:.link.yellow {:color "yellow"}]
+     [:a.link.blue
+      [:&;hover {:color "blue"}]]]
+  [:.container {:color "blue"}])
+  [".brother + .sister" {:color "orange"}])
+```
+
+Which returns a map with the `:styles` key having the value of new garden data with all class names hashed and a `:names` map that allows you to look up the hashed name of and class name.
+
+Note that the `garden-css-modules.defstyle` macro does not yet inject styles into the `head` tag in `cljs` mode as intendtended.
+
+## Deprecated (TODO: restore Figwheel)
 
 To get an interactive development environment run:
 
