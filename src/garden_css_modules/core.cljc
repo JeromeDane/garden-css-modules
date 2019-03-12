@@ -47,7 +47,6 @@
          children (into [] (if style (rest (rest garden)) (rest garden)))]
     (if (vector? selector)
       (let [modules (map modularize garden)]
-        {:styles nil :names nil}
         {:styles (into [] (map #(% :styles) modules))
          :names (reduce
                   #(merge (%1 :names) (%2 :names))
