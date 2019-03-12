@@ -59,3 +59,7 @@ get live reloading, nor a REPL.
 ## Testing
 
 `lein test`
+
+## Credits
+
+Macro implementation inspired by https://github.com/matthieu-beteille/cljs-css-modules
