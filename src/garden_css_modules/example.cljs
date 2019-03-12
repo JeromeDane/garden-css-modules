@@ -1,9 +1,7 @@
-(ns garden-css-modules.core
-    (:require [garden-css-modules.macro :refer-macros [defstyle]]))
-              ; [garden-css-modules.runtime :refer [modularize]]))
+(ns garden-css-modules.example
+    (:require [garden-css-modules.core :refer [modularize] :refer-macros [defstyle]]))
 
-(defn p [a]
-  (js/console.log (js/JSON.stringify (clj->js a) nil 2)))
+(enable-console-print!)
 
 (defstyle style
   [:div.foo.bar {:color "red"}
@@ -12,11 +10,7 @@
      [:.link.blue {:color "blue"}]]]
   [:.container {:color "blue"}])
 
-(p style)
-; (p style-module)
-
-
-
+;;; TODO: Create example UI
 
 (defn on-js-reload [])
   ;; optionally touch your app-state to force rerendering depending on
