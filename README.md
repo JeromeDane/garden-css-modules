@@ -6,6 +6,7 @@ WORK IN PROGRESS. NO GUARANTEES AT THIS POINT.
 ## To Do
 
 * Inject styles into `head` tag when calling `defstyle` macro
+* Handle @media and keyframes
 * Allow concatination of hashed class names like `:class (my-style :foo :bar :baz)`
 * Ensure proper detection of namespace
 * Implement production mode to short hash class + namespace
