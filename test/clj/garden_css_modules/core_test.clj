@@ -104,7 +104,7 @@
         (let [{:keys [names styles]}
               (sut/modularize [:.foo.bar {:color 'red}])]
           (is (= names {:foo ".foo__garden-css-modules_core"
-                        :bar  ".bar__garden-css-modules_core"}))
+                        :bar ".bar__garden-css-modules_core"}))
           (is (= styles [:.foo__garden-css-modules_core.bar__garden-css-modules_core
                          {:color 'red}]))))
 
