@@ -5,7 +5,7 @@
         [clojure.pprint :refer [pprint]]
         [garden.stylesheet :refer [at-media at-keyframes]]))
   #?(:cljs
-     (:requiretest
+     (:require
       [clojure.string :as s]
       [garden.stylesheet :refer [at-media at-keyframes]] ; TODO: Handle keyframes and @media
       [garden-css-modules.runtime :refer [inject-style!]])))
