@@ -18,7 +18,7 @@ WORK IN PROGRESS. NO GUARANTEES AT THIS POINT.
 
 ## Development
 
-For now, start a repl with `lein repl` and connect using an nrepl client. Evaluate the `garden-css-modules` namespace, then call modularize. E.G:
+For now, start a repl with `lein repl` and connect using an nrepl client. Evaluate the `garden-css-modules.core` namespace, then call modularize. E.G:
 
 ```
 (modularize
