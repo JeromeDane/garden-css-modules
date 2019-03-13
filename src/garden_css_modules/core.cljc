@@ -21,7 +21,7 @@
 
 
 (defn- hash-selector [selector]
-  (let [parts (s/split (name selector) #"(?=\.)|(?=#)|(?=\[)|(?=:)|(?=\s)")
+  (let [parts (s/split (name selector) #"(?=\.)|(?=#)|(?=\[)|(?=:)|(?=\s)|(?=&)")
         hashed (reduce
                 #(merge %1 {%2 (hash-part %2)})
                 {}

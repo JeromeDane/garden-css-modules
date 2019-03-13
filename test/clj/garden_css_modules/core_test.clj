@@ -108,6 +108,12 @@
           (is (= styles [:.foo__garden-css-modules_core.bar__garden-css-modules_core
                          {:color 'red}]))))
 
+     (testing "concatenation operator"
+       (let [{:keys [names styles]}
+             (sut/modularize [:div [:&.foo {:color 'red}]])]
+         (is (= names {:foo ".foo__garden-css-modules_core"}))
+         (is (= styles [:div [:&.foo__garden-css-modules_core {:color 'red}]]))))
+
      (testing "class names with pseudo-classes"
        (let [{:keys [names styles]}
              (sut/modularize [:.foo:hover {:color 'red}])]
