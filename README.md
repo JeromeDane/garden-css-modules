@@ -11,7 +11,7 @@ WORK IN PROGRESS. NO GUARANTEES AT THIS POINT.
 * Ensure proper detection of namespace
 * Implement production mode to short hash class + namespace
 * In dev mode, append class + namespace with short hash
-* Re-implement figwheel in `projct.clj` and create easy-to use example
+* Re-implement figwheel in `project.clj` and create easy-to use example
 * Add documentation and examples to this readme
 * Get feedback from colleagues and iterate
 * Publish to clojars
@@ -33,7 +33,7 @@ For now, start a repl with `lein repl` and connect using an nrepl client. Evalua
 
 This returns a map with the `:styles` key having the value of new garden data with all class names hashed and a `:names` map that allows you to look up the hashed name of any class name.
 
-Note that the `garden-css-modules/defstyle` macro does not yet inject styles into the `head` tag in `cljs` mode as intendtended.
+Note that the `garden-css-modules/defstyle` macro does not yet inject styles into the `head` tag in `cljs` mode as intended.
 
 ## Deprecated (TODO: restore Figwheel)
 
