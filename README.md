@@ -105,4 +105,5 @@ This returns a map with the `:styles` key having the value of new garden data wi
 
 ## Credits
 
-Macro implementation inspired by https://github.com/matthieu-beteille/cljs-css-modules
+* Macro implementation inspired by https://github.com/matthieu-beteille/cljs-css-modules
+* Special thanks to [aisamu](https://github.com/aisamu) for help and support
