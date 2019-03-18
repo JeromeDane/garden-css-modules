@@ -1,40 +1,40 @@
 (ns garden-css-modules.core
   #?(:clj
        (:require
-        [clojure.string :as s]
+        [clojure.string :as string]
         [garden.core :refer [css]]
         [garden.stylesheet :refer [at-media at-keyframes]]))
   #?(:cljs
      (:require
-      [clojure.string :as s]
+      [clojure.string :as string]
       [garden.stylesheet :refer [at-media at-keyframes]] ; TODO: Handle keyframes and @media
       [garden-css-modules.runtime :refer [inject-style!]])))
 
 (defn- get-namespace [] `~(str *ns*))
 
 (defn- hash-part [part]
-  (if (s/starts-with? part ".")
+  (if (string/starts-with? part ".")
     (let [name (str part
                     "__"
-                    (s/replace (get-namespace) #"\." "_"))
+                    (string/replace (get-namespace) #"\." "_"))
           hashed (hash name)]
       (str name "-" hashed)) ; TODO: Return only hash when in production mode
       ; (str "._" hashed))
     part))
 
 (defn- hash-selector [selector]
-  (let [parts (s/split (name selector) #"(?=\.)|(?=#)|(?=\[)|(?=:)|(?=\s)|(?=&)")
+  (let [parts (string/split (name selector) #"(?=\.)|(?=#)|(?=\[)|(?=:)|(?=\s)|(?=&)")
         hashed (reduce
                 #(merge %1 {%2 (hash-part %2)})
                 {}
                 parts)]
-   {:selector (keyword (s/join "" (map hashed parts)))
+   {:selector (keyword (apply str (map hashed parts)))
     :names (reduce-kv
             (fn [acc part hash]
               (merge acc
-                 (if (s/starts-with? part ".")
-                   {(keyword (s/replace (name part) #"^\." ""))
-                    (s/replace hash #"^\." "")}
+                 (if (string/starts-with? part ".")
+                   {(keyword (string/replace (name part) #"^\." ""))
+                    (string/replace hash #"^\." "")}
                    {})))
             {}
             hashed)}))
@@ -64,13 +64,14 @@
 (defmacro defstyle
   [style-id & styles]
   (let [inject-style-fn (symbol "garden-css-modules.runtime" "inject-style!")
-        module (apply modularize styles)]
+        module (apply modularize styles)
+        style-name (name style-id)]
     (if (boolean (:ns &env))
       `(do
         (~inject-style-fn
           (css (~module :styles))
           (get-namespace)
-          ~(name style-id))
+          ~style-name)
         (def ~style-id ~(module :names)))
       `(do
         (def ~style-id {:names ~(module :names)
