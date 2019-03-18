@@ -11,14 +11,15 @@ WORK IN PROGRESS. NO GUARANTEES AT THIS POINT.
 * Ensure proper detection of namespace
 * Implement production mode to short hash class + namespace
 * In dev mode, append class + namespace with short hash
-* Re-implement figwheel in `project.clj` and create easy-to use example
 * Add documentation and examples to this readme
 * Get feedback from colleagues and iterate
 * Publish to clojars
 
 ## Development
 
-For now, start a repl with `lein repl` and connect using an nrepl client. Evaluate the `garden-css-modules.core` namespace, then call modularize. E.G:
+`lein figwheel` will start an example app running on http://local.c0pt3r.com:3449/.
+
+You can also start a repl with `lein repl` and connect using an nrepl client. Evaluate the `garden-css-modules.core` namespace, then call modularize. E.G:
 
 ```
 (modularize
