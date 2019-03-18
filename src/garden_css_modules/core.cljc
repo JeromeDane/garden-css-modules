@@ -10,7 +10,7 @@
       [garden.stylesheet :refer [at-media at-keyframes]] ; TODO: Handle keyframes and @media
       [garden-css-modules.runtime :refer [inject-style!]])))
 
-(defmacro get-namespace [] `~(str *ns*))
+(defn- get-namespace [] `~(str *ns*))
 
 (defn- hash-part [part]
   (if (s/starts-with? part ".")
