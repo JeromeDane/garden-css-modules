@@ -15,11 +15,13 @@
 
 (defn- hash-part [part]
   (if (s/starts-with? part ".")
-    (str part
-      "__"
-      (s/replace (get-namespace) #"\." "_"))
+    (let [name (str part
+                    "__"
+                    (s/replace (get-namespace) #"\." "_"))
+          hashed (hash name)]
+      (str name "-" hashed)) ; TODO: Return only hash when in production mode
+      ; (str "._" hashed))
     part))
-
 
 (defn- hash-selector [selector]
   (let [parts (s/split (name selector) #"(?=\.)|(?=#)|(?=\[)|(?=:)|(?=\s)|(?=&)")
@@ -32,8 +34,8 @@
             (fn [acc part hash]
               (merge acc
                  (if (s/starts-with? part ".")
-                   {(keyword (s/replace (name part) #"^." ""))
-                    (s/replace hash #"^." "")}
+                   {(keyword (s/replace (name part) #"^\." ""))
+                    (s/replace hash #"^\." "")}
                    {})))
             {}
             hashed)}))
