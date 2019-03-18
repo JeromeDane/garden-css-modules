@@ -32,8 +32,6 @@ You can also start a repl with `lein repl` and connect using an nrepl client. Ev
 
 This returns a map with the `:styles` key having the value of new garden data with all class names hashed and a `:names` map that allows you to look up the hashed name of any class name.
 
-Note that the `garden-css-modules/defstyle` macro does not yet inject styles into the `head` tag in `cljs` mode as intended.
-
 ## Testing
 
 `lein test`
