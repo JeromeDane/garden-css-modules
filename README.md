@@ -6,7 +6,7 @@ WORK IN PROGRESS. NO GUARANTEES AT THIS POINT.
 ## To Do
 
 * Handle @media and keyframes
-* Allow concatination of hashed class names like `:class (my-style :foo :bar :baz)`
+* Allow concatination of hashed class names like `{:class (my-style :foo :bar :baz)}`
 * Implement production mode to short hash class + namespace
 * In dev mode, append class + namespace with short hash
 * Add documentation and examples to this readme
