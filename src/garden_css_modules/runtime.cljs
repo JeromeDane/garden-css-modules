@@ -1,6 +1,10 @@
 (ns garden-css-modules.runtime
   (:require [garden.core :refer [css]]))
 
+;; Note: The contents of this namespace are lifted pretty directly
+;; from https://github.com/matthieu-beteille/cljs-css-modules. All
+;; credit for the initial implementation goes there.
+
 (def injected-styles (atom {}))
 
 (defn- update-style! [element style]
