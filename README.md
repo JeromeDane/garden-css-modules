@@ -1,16 +1,84 @@
 # garden-css-modules
-Apply CSS module style class name hashing to garden data. Learn more about the principle [here](https://glenmaddern.com/articles/css-modules).
+Apply CSS module style class name hashing to [Garden](https://github.com/noprompt/garden) data in Clojure and ClojureScript. Learn more about the principle [here](https://glenmaddern.com/articles/css-modules).
 
 WORK IN PROGRESS. NO GUARANTEES AT THIS POINT.
 
 ## To Do
 
 * Handle @media and keyframes
-* Allow concatination of hashed class names like `{:class (my-style :foo :bar :baz)}`
 * Implement production mode to short hash class + namespace
-* Add documentation and examples to this readme
+* Allow concatination of hashed class names like `{:class (my-style :foo :bar :baz)}`
 * Get feedback from colleagues and iterate
 * Publish to clojars
+
+## Features
+
+* Automatic, unique hashing of CSS class names
+* Fully supports nested [Garden](https://github.com/noprompt/garden) declarations
+* Support for complex CSS selectors
+* Descriptive, namespaced class names in development
+* Short hashes in production mode (coming soon)
+
+## Example
+
+Consider the following example namespace:
+
+```
+(ns garden-css-modules.example
+    (:require [garden-css-modules.core :refer [modularize] :refer-macros [defstyle]]
+              [reagent.core :as r]
+              [garden.units :refer [em px]]))
+
+(defstyle style
+  [:.container {:font-family "arial,sans-serif"}
+    [:h1 {:border-bottom [[(px 1) 'solid]]}]
+    [:.code {:font-style 'italic
+             :background "#ccc"
+             :padding [[(em .25) (em .5)]]}]])
+
+(defn app []
+  [:div {:class (style :container)}
+    [:h1 "Garden CSS Modules Demo App"]
+    [:p "This is a demo. Edit "
+        [:span {:class (style :code)} "garden-css-modules.example"]
+        " to see live changes."]])
+
+(r/render [app]
+  (.getElementById js/document "app"))
+```
+
+This will create a small [reagent](https://github.com/reagent-project/reagent) component and mount it to the DOM element with ID of "app".
+
+Resulting HTML:
+
+```
+<div class="container__garden-css-modules_example-1287325951">
+  <h1>Garden CSS Modules Demo App</h1>
+  <p>
+    This is a demo. Edit
+    <span class="code__garden-css-modules_example-132277090">garden-css-modules.example</span>
+    to see live changes.</p>
+</div>
+```
+
+Resulting CSS:
+
+```
+.container__garden-css-modules_example-1287325951 {
+  font-family: arial,sans-serif;
+}
+
+.container__garden-css-modules_example-1287325951 h1 {
+  border-bottom: 1px solid;
+}
+
+.container__garden-css-modules_example-1287325951 .code__garden-css-modules_example-132277090 {
+  font-style: italic;
+  background: #ccc;
+  padding: 0.25em 0.5em;
+}
+```
+
 
 ## Development
 
