@@ -74,7 +74,7 @@
     (if (boolean (:ns &env))
       `(do
         (~(symbol "garden-css-modules.runtime" "inject-style!")
-          (css (~module :styles))
+          (css {:pretty-print? (not (prod?))} (~module :styles))
           (get-namespace)
           ~(name style-id))
         (def ~style-id ~(module :names)))
