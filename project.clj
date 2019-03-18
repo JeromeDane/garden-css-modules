@@ -29,7 +29,14 @@
                            :output-to "resources/public/js/compiled/garden_css_modules.js"
                            :output-dir "resources/public/js/compiled/out"
                            :source-map-timestamp true
-                           :preloads [devtools.preload]}}]}
+                           :preloads [devtools.preload]}}
+
+               {:id "min"
+                :source-paths ["src"]
+                :compiler {:output-to "resources/public/js/compiled/garden_css_modules.js"
+                           :main garden-css-modules.example
+                           :optimizations :advanced
+                           :pretty-print false}}]}
 
                ; {:id           "test"
                ;   :source-paths ["src/" "test/cljs"]
