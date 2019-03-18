@@ -5,7 +5,6 @@ WORK IN PROGRESS. NO GUARANTEES AT THIS POINT.
 
 ## To Do
 
-* Inject styles into `head` tag when calling `defstyle` macro
 * Handle @media and keyframes
 * Allow concatination of hashed class names like `:class (my-style :foo :bar :baz)`
 * Implement production mode to short hash class + namespace
@@ -16,7 +15,7 @@ WORK IN PROGRESS. NO GUARANTEES AT THIS POINT.
 
 ## Development
 
-`lein figwheel` will start an example app running on http://local.c0pt3r.com:3449/.
+`lein figwheel` will start an example app running on http://local.c0pt3r.com:3449/. This example app lets you easily play around with this library to see what it's capable of.
 
 You can also start a repl with `lein repl` and connect using an nrepl client. Evaluate the `garden-css-modules.core` namespace, then call modularize. E.G:
 

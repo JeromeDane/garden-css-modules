@@ -1,6 +1,5 @@
 (ns garden-css-modules.runtime
-  (:require [garden.core :refer [css]]
-            [clojure.string :as s]))
+  (:require [garden.core :refer [css]]))
 
 (def injected-styles (atom {}))
 
@@ -16,7 +15,7 @@
     (update-style! element style)
     (swap! injected-styles assoc id element)))
 
-(defn- inject-style! [style ns name]
+(defn inject-style! [style ns name]
   (let [id (symbol (str ns "-" name))
         injected-style (id @injected-styles)]
     (if injected-style

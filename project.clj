@@ -38,11 +38,11 @@
                ;                  :main          'cljs-css-modules.runner
                ;                  :optimizations :none}}]}
 
-  :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
+  :figwheel {};; :http-server-root "public" ;; default and assumes "resources"
              ;; :server-port 3449 ;; default
              ;; :server-ip "127.0.0.1"
 
-             :css-dirs ["resources/public/css"]} ;; watch and update CSS
+             ; :css-dirs ["resources/public/css"]} ;; watch and update CSS
 
              ;; Start an nREPL server into the running figwheel process
              ; :nrepl-port 7888
@@ -86,7 +86,7 @@
                                   [figwheel-sidecar "0.5.16"]
                                   [philoskim/debux "0.5.6"]
                                   [reagent "0.8.1"]]
-                                  
+
                    ;; need to add dev source path here to get user.clj loaded
                    :source-paths ["src" "dev"]
                    ;; for CIDER
