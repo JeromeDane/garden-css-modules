@@ -21,15 +21,16 @@
 
   :cljsbuild {:builds
               [{:id "dev"
-                 :source-paths ["src"]
-                 :figwheel {:on-jsload "garden-css-modules.core/on-js-reload"}
-                            ; :open-urls ["http://localhost:3449/index.html"]}
-                 :compiler {:main garden-css-modules.example
-                            :asset-path "js/compiled/out"
-                            :output-to "resources/public/js/compiled/garden_css_modules.js"
-                            :output-dir "resources/public/js/compiled/out"
-                            :source-map-timestamp true
-                            :preloads [devtools.preload]}}]}
+
+                :source-paths ["src"]
+                :figwheel {:on-jsload "garden-css-modules.core/on-js-reload"}
+                           ; :open-urls ["http://localhost:3449/index.html"]}
+                :compiler {:main garden-css-modules.example
+                           :asset-path "js/compiled/out"
+                           :output-to "resources/public/js/compiled/garden_css_modules.js"
+                           :output-dir "resources/public/js/compiled/out"
+                           :source-map-timestamp true
+                           :preloads [devtools.preload]}}]}
 
                ; {:id           "test"
                ;   :source-paths ["src/" "test/cljs"]
