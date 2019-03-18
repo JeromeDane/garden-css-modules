@@ -1,6 +1,7 @@
 (ns garden-css-modules.core
   #?(:clj
        (:require
+        [cljs.env]
         [clojure.string :as string]
         [garden.core :refer [css]]
         [garden.stylesheet :refer [at-media at-keyframes]]))
@@ -13,10 +14,9 @@
 (defn- get-namespace [] `~(str *ns*))
 
 (defmacro prod? []
-  (if (boolean (:ns &env))
-    `(= :advanced (get-in @cljs.env/*compiler* [:options :optimizations]))
-    `(or (= (System/getenv "ENV") "prod")
-         (= (System/getenv "ENV") "production"))))
+  (if cljs.env/*compiler*
+    (= :advanced (get-in @cljs.env/*compiler* [:options :optimizations]))
+    (string/starts-with? "prod" (System/getenv "ENV"))))
 
 (defn- hash-part [part]
   (if (string/starts-with? part ".")
