@@ -12,14 +12,21 @@
 
 (defn- get-namespace [] `~(str *ns*))
 
+(defmacro prod? []
+  (if (boolean (:ns &env))
+    `(= :advanced (get-in @cljs.env/*compiler* [:options :optimizations]))
+    `(or (= (System/getenv "ENV") "prod")
+         (= (System/getenv "ENV") "production"))))
+
 (defn- hash-part [part]
   (if (string/starts-with? part ".")
     (let [name (str part
                     "__"
                     (string/replace (get-namespace) #"\." "_"))
           hashed (hash name)]
-      (str name "-" hashed)) ; TODO: Return only hash when in production mode
-      ; (str "._" hashed))
+      (if (prod?)
+        (str ".s" hashed)
+        (str name "-" hashed)))
     part))
 
 (defn- hash-selector [selector]
@@ -63,15 +70,13 @@
 
 (defmacro defstyle
   [style-id & styles]
-  (let [inject-style-fn (symbol "garden-css-modules.runtime" "inject-style!")
-        module (apply modularize styles)
-        style-name (name style-id)]
+  (let [module (apply modularize styles)]
     (if (boolean (:ns &env))
       `(do
-        (~inject-style-fn
+        (~(symbol "garden-css-modules.runtime" "inject-style!")
           (css (~module :styles))
           (get-namespace)
-          ~style-name)
+          ~(name style-id))
         (def ~style-id ~(module :names)))
       `(do
         (def ~style-id {:names ~(module :names)
