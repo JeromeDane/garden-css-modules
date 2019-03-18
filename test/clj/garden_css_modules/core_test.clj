@@ -49,19 +49,19 @@
       (testing "simple"
         (let [{:keys [names styles]}
               (sut/modularize [:.foo {:color 'red}])]
-          (is (= names {:foo ".foo__garden-css-modules_core"}))
+          (is (= names {:foo "foo__garden-css-modules_core"}))
           (is (= styles [:.foo__garden-css-modules_core {:color 'red}]))))
 
       (testing "tag name classed"
         (let [{:keys [names styles]}
               (sut/modularize [:a.foo {:color 'red}])]
-          (is (= names {:foo ".foo__garden-css-modules_core"}))
+          (is (= names {:foo "foo__garden-css-modules_core"}))
           (is (= styles [:a.foo__garden-css-modules_core {:color 'red}]))))
 
       (testing "tag name with attribute selector classed"
         (let [{:keys [names styles]}
               (sut/modularize ["a[href=\"bar\"].foo" {:color 'red}])]
-          (is (= names {:foo ".foo__garden-css-modules_core"}))
+          (is (= names {:foo "foo__garden-css-modules_core"}))
           (is (= styles
                  [(keyword "a[href=\"bar\"].foo__garden-css-modules_core")
                   {:color 'red}]))))
@@ -71,9 +71,9 @@
               (sut/modularize [:.parent {:color 'red}
                                 [:.child {:color 'blue}
                                   [:.grandchild {:color 'green}]]])]
-          (is (= names {:parent ".parent__garden-css-modules_core"
-                        :child  ".child__garden-css-modules_core"
-                        :grandchild  ".grandchild__garden-css-modules_core"}))
+          (is (= names {:parent "parent__garden-css-modules_core"
+                        :child  "child__garden-css-modules_core"
+                        :grandchild  "grandchild__garden-css-modules_core"}))
           (is (= styles [:.parent__garden-css-modules_core {:color 'red}
                           [:.child__garden-css-modules_core {:color 'blue}
                             [:.grandchild__garden-css-modules_core {:color 'green}]]]))))
@@ -81,8 +81,8 @@
       (testing "sibling selector"
        (let [{:keys [names styles]}
              (sut/modularize [".foo + .bar" {:background-color 'yellow}])]
-         (is (= names {:foo ".foo__garden-css-modules_core"
-                       :bar  ".bar__garden-css-modules_core"}))
+         (is (= names {:foo "foo__garden-css-modules_core"
+                       :bar  "bar__garden-css-modules_core"}))
          (is (= styles
                 [(keyword (str ".foo__garden-css-modules_core"
                                " + "
@@ -92,8 +92,8 @@
       (testing "direct descendent selector"
        (let [{:keys [names styles]}
              (sut/modularize [".foo > .bar" {:background-color 'yellow}])]
-         (is (= names {:foo ".foo__garden-css-modules_core"
-                       :bar  ".bar__garden-css-modules_core"}))
+         (is (= names {:foo "foo__garden-css-modules_core"
+                       :bar  "bar__garden-css-modules_core"}))
          (is (= styles
                 [(keyword (str ".foo__garden-css-modules_core"
                                " > "
@@ -103,28 +103,28 @@
       (testing "combined class names"
         (let [{:keys [names styles]}
               (sut/modularize [:.foo.bar {:color 'red}])]
-          (is (= names {:foo ".foo__garden-css-modules_core"
-                        :bar ".bar__garden-css-modules_core"}))
+          (is (= names {:foo "foo__garden-css-modules_core"
+                        :bar "bar__garden-css-modules_core"}))
           (is (= styles [:.foo__garden-css-modules_core.bar__garden-css-modules_core
                          {:color 'red}]))))
 
      (testing "concatenation operator"
        (let [{:keys [names styles]}
              (sut/modularize [:div [:&.foo {:color 'red}]])]
-         (is (= names {:foo ".foo__garden-css-modules_core"}))
+         (is (= names {:foo "foo__garden-css-modules_core"}))
          (is (= styles [:div [:&.foo__garden-css-modules_core {:color 'red}]]))))
 
      (testing "class names with pseudo-classes"
        (let [{:keys [names styles]}
              (sut/modularize [:.foo:hover {:color 'red}])]
-         (is (= names {:foo ".foo__garden-css-modules_core"}))
+         (is (= names {:foo "foo__garden-css-modules_core"}))
          (is (= styles [:.foo__garden-css-modules_core:hover {:color 'red}]))))
 
      (testing "handles multiple arguments"
        (let [{:keys [names styles]}
              (sut/modularize [:.foo {:color 'red}] [:.bar {:color 'blue}])]
-        (is (= names {:foo ".foo__garden-css-modules_core"
-                      :bar ".bar__garden-css-modules_core"}))
+        (is (= names {:foo "foo__garden-css-modules_core"
+                      :bar "bar__garden-css-modules_core"}))
         (is (= styles [[:.foo__garden-css-modules_core {:color 'red}]
                        [:.bar__garden-css-modules_core {:color 'blue}]])))))))
 
@@ -132,7 +132,7 @@
 (deftest defstyle
   (testing "declares symbol to be result of calling modularise in clojure mode"
     (sut/defstyle test-style [:.foo {:color 'red}])
-    (is (= (test-style :names) {:foo ".foo__garden-css-modules_core"}))
+    (is (= (test-style :names) {:foo "foo__garden-css-modules_core"}))
     (is (= (test-style :styles)
            [:.foo__garden-css-modules_core {:color 'red}]))))
 

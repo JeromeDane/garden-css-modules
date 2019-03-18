@@ -32,7 +32,7 @@
               (merge acc
                  (if (s/starts-with? part ".")
                    {(keyword (s/replace (name part) #"^." ""))
-                    hash}
+                    (s/replace hash #"^." "")}
                    {})))
             {}
             hashed)}))
