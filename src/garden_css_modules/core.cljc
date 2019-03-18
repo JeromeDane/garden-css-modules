@@ -2,7 +2,6 @@
   #?(:clj
        (:require
         [clojure.string :as s]
-        [clojure.pprint :refer [pprint]]
         [garden.core :refer [css]]
         [garden.stylesheet :refer [at-media at-keyframes]]))
   #?(:cljs
