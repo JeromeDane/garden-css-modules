@@ -118,7 +118,16 @@
        (let [{:keys [names styles]}
              (sut/modularize [:.foo:hover {:color 'red}])]
          (is (= names {:foo ".foo__garden-css-modules_core"}))
-         (is (= styles [:.foo__garden-css-modules_core:hover {:color 'red}])))))))
+         (is (= styles [:.foo__garden-css-modules_core:hover {:color 'red}]))))
+
+     (testing "handles multiple arguments"
+       (let [{:keys [names styles]}
+             (sut/modularize [:.foo {:color 'red}] [:.bar {:color 'blue}])]
+        (is (= names {:foo ".foo__garden-css-modules_core"
+                      :bar ".bar__garden-css-modules_core"}))
+        (is (= styles [[:.foo__garden-css-modules_core {:color 'red}]
+                       [:.bar__garden-css-modules_core {:color 'blue}]])))))))
+
 
 (deftest defstyle
   (testing "declares symbol to be result of calling modularise in clojure mode"

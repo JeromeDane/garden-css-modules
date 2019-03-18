@@ -41,17 +41,14 @@
   ([& garden]
    (let [garden (if (= 1 (count garden))
                     (first garden)
-                    garden)
+                    (into [] garden))
          selector (first garden)
          style (when (map? (second garden)) (second garden))
          children (into [] (if style (rest (rest garden)) (rest garden)))]
     (if (vector? selector)
       (let [modules (map modularize garden)]
         {:styles (into [] (map #(% :styles) modules))
-         :names (reduce
-                  #(merge (%1 :names) (%2 :names))
-                  {}
-                  modules)})
+         :names (reduce #(merge %1 (%2 :names)) {} modules)})
       (let [{:keys [styles names]}
             (when (first children) (modularize (into [] children)))
             hash (hash-selector selector)]
