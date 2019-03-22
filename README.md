@@ -79,6 +79,16 @@ Resulting CSS:
 }
 ```
 
+## Production Builds
+
+You can reduce the length of class names to just the hash by running in production mode. Add `:optimizations :advanced` to your `project.clj` for ClojureScript when using the `defstyle` macro, or
+set `ENV=prod` or `ENV=production` in your environment variables if using the `modularize` function directly in a Clojure app. The example above would then result in the following HTML:
+
+... and the following CSS:
+
+```
+.s1287325951{font-family:arial,sans-serif}.s1287325951 h1{border-bottom:1px solid}.s1287325951 .s132277090{font-style:italic;background:#ccc;padding:0.25em 0.5em}.s1287325951 a:hover{border-bottom:2px solid;text-decoration:none}
+```
 
 ## Development
 
