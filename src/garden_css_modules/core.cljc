@@ -47,33 +47,34 @@
             hashed)}))
 
 (defn modularize
-  ([& garden]
-   (let [garden (if (= 1 (count garden))
-                    (first garden)
-                    (into [] garden))
-         selector (first garden)
-         style (when (map? (second garden)) (second garden))
-         children (into [] (if style (rest (rest garden)) (rest garden)))]
-    (if (map? garden)
-      (cond
-        (= (:identifier garden) :media)
-        (let [{:keys [styles names]} (modularize (get-in garden [:value :rules]))]
-          {:styles (update-in garden [:value :rules] (fn [_]  (apply list styles)))
-           :names names})
-        :else garden)
-      (if (vector? selector)
-        (let [modules (map modularize garden)]
-          {:styles (into [] (map #(% :styles) modules))
-           :names (reduce #(merge %1 (%2 :names)) {} modules)})
-        (let [{:keys [styles names]}
-              (when (first children) (modularize (into [] children)))
-              hash (hash-selector selector)]
-          (when (first children))
-          {:styles (into [] (remove nil?
-                              (concat
-                               [(hash :selector) style]
-                               styles)))
-           :names (merge (hash :names) names)}))))))
+  [& garden]
+  (let [garden (if (= 1 (count garden))
+                  (first garden)
+                  (into [] garden))
+        selector (first garden)
+        style (when (map? (second garden)) (second garden))
+        children (into [] (if style (rest (rest garden)) (rest garden)))]
+   ; (if (map? garden))
+   (if false
+     (cond
+       (= (:identifier garden) :medis-a)
+       (let [{:keys [styles names]} (modularize (get-in garden [:value :rules]))]
+         {:styles (update-in garden [:value :rules] (fn [_]  (apply list styles)))
+          :names names})
+       :else garden)
+     (if (vector? selector)
+       (let [modules (map modularize garden)]
+         {:styles (into [] (map #(% :styles) modules))
+          :names (reduce #(merge %1 (%2 :names)) {} modules)})
+       (let [{:keys [styles names]}
+             (when (first children) (modularize (into [] children)))
+             hash (hash-selector selector)]
+         (when (first children))
+         {:styles (into [] (remove nil?
+                             (concat
+                              [(hash :selector) style]
+                              styles)))
+          :names (merge (hash :names) names)})))))
 
 (defmacro defstyle
   [style-id & styles]
