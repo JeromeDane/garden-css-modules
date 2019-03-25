@@ -1,6 +1,7 @@
 (ns garden-css-modules.core-test
   (:require [clojure.test :refer [deftest are is testing]]
-            [garden-css-modules.core :as sut]))
+            [garden-css-modules.core :as sut]
+            [garden.stylesheet :refer [at-media at-keyframes]]))
 
 (deftest modularize
   (with-redefs [hash (fn [_] "hash")]
@@ -127,8 +128,18 @@
           (is (= names {:foo "foo__user-hash"
                         :bar "bar__user-hash"}))
           (is (= styles [[:.foo__user-hash {:color 'red}]
-                         [:.bar__user-hash {:color 'blue}]]))))))))
+                         [:.bar__user-hash {:color 'blue}]])))))
 
+      (testing "handles complex rules"
+        (testing "at-media"
+          (let [{:keys [names styles]}
+                (sut/modularize
+                  (at-media {:screen true}
+                    [:h1.foo {:font-weight 'bold}
+                      [:.bar {:font-weight 'bold}]]))]
+           (is (= names {:foo "foo__user-hash"
+                         :bar "bar__user-hash"}))
+           (is (= :media (:identifier styles)))))))))
 
 (deftest defstyle ; Note: with-redefs does not work for macros, so we have to use native hash
   (testing "declares symbol to be result of calling modularise in clojure mode"
