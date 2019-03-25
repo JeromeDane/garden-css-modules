@@ -1,7 +1,8 @@
 (ns garden-css-modules.example
-    (:require [garden-css-modules.core :refer [modularize] :refer-macros [defstyle]]
+    (:require [garden-css-modules.core :refer [p modularize] :refer-macros [defstyle]]
               [reagent.core :as r]
-              [garden.units :refer [em px]]))
+              [garden.units :refer [em px]]
+              [garden.stylesheet :refer [at-media]]))
 
 (enable-console-print!)
 
@@ -17,7 +18,13 @@
              :background "#ccc"
              :padding [[(em .25) (em .5)]]}]
     [:a:hover {:border-bottom [[(px 2) 'solid]]
-               :text-decoration 'none}]])
+                   :text-decoration 'none}]
+    [:.small-screen {:display 'none
+                     :font-size (em 2)}]]
+  (at-media {:max-width (px 500)}
+   [:.container {:color 'red}
+    [:p {:font-size (em .5)}]
+    [:.small-screen {:display 'block}]]))
 
 (defn app []
   [:div {:class (style :container)}
@@ -27,7 +34,8 @@
         " to see live changes."]
     [:p "Everything supported in "
       [:a {:href "https://github.com/noprompt/garden"} "garden"]
-      " should be supported here"]])
+      " should be supported here"]
+    [:p {:class (:small-screen style)} "YOUR SCREEN IS SMALL!"]])
 
 (r/render [app]
   (.getElementById js/document "app"))

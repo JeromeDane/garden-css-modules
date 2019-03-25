@@ -1,5 +1,4 @@
-(ns garden-css-modules.runtime
-  (:require [garden.core :refer [css]]))
+(ns garden-css-modules.runtime)
 
 ;; Note: The contents of this namespace are lifted pretty directly
 ;; from https://github.com/matthieu-beteille/cljs-css-modules. All

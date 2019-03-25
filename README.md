@@ -5,7 +5,7 @@ WORK IN PROGRESS. NO GUARANTEES AT THIS POINT.
 
 ## To Do
 
-* Handle @media and keyframes
+* Handle keyframes
 * Implement production mode to short hash class + namespace
 * Allow concatination of hashed class names like `{:class (my-style :foo :bar :baz)}`
 * Get feedback from colleagues and iterate

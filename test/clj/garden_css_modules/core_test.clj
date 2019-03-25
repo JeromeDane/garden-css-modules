@@ -135,11 +135,14 @@
           (let [{:keys [names styles]}
                 (sut/modularize
                   (at-media {:screen true}
-                    [:h1.foo {:font-weight 'bold}
-                      [:.bar {:font-weight 'bold}]]))]
-           (is (= names {:foo "foo__user-hash"
-                         :bar "bar__user-hash"}))
-           (is (= :media (:identifier styles)))))))))
+                    [:h1.foo {:font-weight "bold"}
+                     [:.bar {:color "red"}]]))]
+            (is (= names {:foo "foo__user-hash"
+                          :bar "bar__user-hash"}))
+            (is (= :media (:identifier styles)))
+            (is (= (get-in styles [:value :rules])
+                   [:h1.foo__user-hash {:font-weight "bold"}
+                    [:.bar__user-hash {:color "red"}]]))))))))
 
 (deftest defstyle ; Note: with-redefs does not work for macros, so we have to use native hash
   (testing "declares symbol to be result of calling modularise in clojure mode"
