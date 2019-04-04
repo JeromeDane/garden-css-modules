@@ -4,7 +4,6 @@
         [cljs.env]
         [clojure.string :as string]
         [garden.core :refer [css]]
-        [garden.stylesheet :refer [at-media]]
         [clojure.pprint]))
 
   #?(:cljs
@@ -12,7 +11,6 @@
       [clojure.string :as string]
       [garden-css-modules.runtime :refer [inject-style!]]
       [garden.core :refer [css]]
-      [garden.stylesheet :refer [at-media]]
       [clojure.pprint]))
 
 
