@@ -3,15 +3,13 @@
        (:require
         [cljs.env]
         [clojure.string :as string]
-        [garden.core :refer [css]]
-        [clojure.pprint]))
+        [garden.core :refer [css]]))
 
   #?(:cljs
      (:require
       [clojure.string :as string]
       [garden-css-modules.runtime :refer [inject-style!]]
-      [garden.core :refer [css]]
-      [clojure.pprint]))
+      [garden.core :refer [css]]))
 
 
   #?(:cljs
@@ -55,8 +53,6 @@
                    {})))
             {}
             hashed)}))
-
-(def p clojure.pprint/pprint)
 
 (defn- rule-identifier
   [rule]
